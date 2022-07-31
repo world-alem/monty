@@ -11,6 +11,8 @@ int main(int argc, char *argv[])
 	FILE *file;
 	unsigned int line_number;
 	char *line;
+	instruction_t *opcodes;
+	stack_t *stack;
 
 	if (argc != 2)
 		usage_error();
@@ -19,6 +21,10 @@ int main(int argc, char *argv[])
 
 	if (file == NULL)
 		file_error(argv[1]);
+
+	/* initialize opcodes and stack */
+	stack = NULL;
+	opcodes = generate_opcodes();
 
 	line = malloc(MAX_BUFFER);
 	line_number = 1;
@@ -30,8 +36,13 @@ int main(int argc, char *argv[])
 	{
 		char *temp = trim(line);
 
-		printf("%s\n", temp);
-		line_number++;
+		if (strlen(temp) > 0)
+		{
+			char **arr = get_args(temp);
+
+			run_codes(&stack, opcodes, arr[0], arr[1], line_number);
+			line_number++;
+		}
 	}
 
 	free(line);

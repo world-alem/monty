@@ -42,3 +42,14 @@ void malloc_error(void)
 	fprintf(stderr, "Error: malloc failed");
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * arg_error - push argument error
+ * @line_number: line number
+ *
+ */
+void arg_error(unsigned int line_number)
+{
+	fprintf(stderr, "L%u: usage: push integer\n", line_number);
+	exit(EXIT_FAILURE);
+}

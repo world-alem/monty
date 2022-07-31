@@ -7,6 +7,7 @@
 #include <ctype.h>
 
 #define MAX_BUFFER 64
+#define OPCODE_COUNT 2
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -42,7 +43,16 @@ void usage_error();
 void file_error(char *file);
 void instruction_error(unsigned int line_number, char *opcode);
 void malloc_error();
+void arg_error(unsigned int line_number);
 
 char *trim(char *str);
+char **get_args(char *line);
+int is_numeric(const char *str);
+
+void run_codes(stack_t **stack, instruction_t *opcodes, char *opcode, char* arg, unsigned int line_number);
+instruction_t *generate_opcodes();
+
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 
 #endif
