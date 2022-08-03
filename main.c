@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
 			char **arr = get_args(temp);
 
 			run_codes(&stack, opcodes, arr[0], arr[1], line_number);
-			line_number++;
 		}
+		line_number++;
 	}
 
 	free(line);
